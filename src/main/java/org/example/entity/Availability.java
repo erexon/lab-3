@@ -21,7 +21,7 @@ public class Availability {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
+   // @JsonIgnore
     private Long id;
     private String name;
 }

@@ -28,8 +28,4 @@ public class Product {
     @JoinColumn(name = "availability_id")
     private Availability availability;
 
-    public String getStatus() {
-        return amount > 0 ? "Есть!:)" : "Нету:(";
-    }
-
 }

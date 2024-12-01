@@ -17,7 +17,13 @@ public class ProductDTO {
     private Short amount;
     @NotNull(message = "id не может быть нулевым")
     private Long categoryId;
+    private String categoryName;
     @NotNull(message = "id не может быть нулевым")
     private Long availabilityId;
+    private String availabilityName;
+
+    public String getStatus() {
+        return amount > 0 ? "Есть!:)" : "Нету:(";
+    }
 
 }

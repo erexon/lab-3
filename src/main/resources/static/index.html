@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management</title>
+
+    <script src = "test.js"></script>
+</head>
+<body onload="fetchProducts()">
+<h1>Product Management</h1>
+
+<!-- Categories -->
+<h2>Categories</h2>
+<button onclick="toggleCategoryTable()">Toggle Categories</button>
+<form onsubmit="event.preventDefault(); document.getElementById('categoryIdInput').value ? updateCategory() : createCategory();">
+    <label>Category id:</label>
+    <input type="text" id="categoryIdInput">
+    <label>Category Name:</label>
+    <input type="text" id="categoryName" required><br>
+    <button type="submit">Save</button>
+</form>
+<table border="1" id="categoryTable" style="display:none;"></table>
+
+<!-- Availabilities -->
+<h2>Availabilities</h2>
+<button onclick="toggleAvailabilityTable()">Toggle Availabilities</button>
+<form onsubmit="event.preventDefault(); document.getElementById('availabilityIdInput').value ? updateAvailability() : createAvailability();">
+    <label>Availability id:</label>
+    <input type="text" id="availabilityIdInput">
+    <label>Availability Name:</label>
+    <input type="text" id="availabilityName" required><br>
+    <button type="submit">Save</button>
+</form>
+<table border="1" id="availabilityTable" style="display:none;"></table>
+
+<!-- Products -->
+<h2>Products</h2>
+
+<h3>filter by category:</h3>
+<select id="categoryFilter" onchange="filterProductsByCategory()">
+    <option value="">All Categories</option>
+</select>
+
+<table border="1" id="productTable"></table>
+
+<h2>Create/Update Product</h2>
+<form onsubmit="event.preventDefault(); document.getElementById('editId').value ? updateProduct() : createProduct();">
+    <input type="hidden" id="editId">
+    <label>Name:</label>
+    <input type="text" id="name" required><br>
+    <label>Amount:</label>
+    <input type="number" id="amount" required><br>
+    <label>Category ID:</label>
+    <input type="number" id="categoryId" required><br>
+    <label>Availability ID:</label>
+    <input type="number" id="availabilityId" required><br>
+    <button type="submit">Save</button>
+</form>
+
+<h2>Stats</h2>
+<table border="1" id="statsTable" style="display:none;"></table>
+
+</body>
+</html>

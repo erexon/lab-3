@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -21,6 +22,9 @@ public class ProductService {
 
 
     public Product create(ProductDTO dto) {
+        if (productRepository.findByName(dto.getName()).isPresent()) {
+            throw new RuntimeException("Category already exists");
+        }
         Product product = Product.builder()
                 .name(dto.getName())
                 .amount(dto.getAmount())
@@ -38,8 +42,18 @@ public class ProductService {
         return productRepository.findByAvailabilityId(id);
     }
 
-   public List<Product> readAll() {
-        return productRepository.findAll();
+    public List<ProductDTO> readAll() {
+        return productRepository.findAll().stream().map(product -> {
+            ProductDTO dto = new ProductDTO();
+            dto.setId(product.getId());
+            dto.setName(product.getName());
+            dto.setAmount(product.getAmount());
+            dto.setCategoryId(product.getCategory().getId());
+            dto.setCategoryName(product.getCategory().getName());
+            dto.setAvailabilityId(product.getAvailability().getId());
+            dto.setAvailabilityName(product.getAvailability().getName());
+            return dto;
+        }).collect(Collectors.toList());
     }
 
     public Product update(ProductDTO dto) {
@@ -59,6 +73,10 @@ public class ProductService {
 
     public void delete(Long id) {
         productRepository.deleteById(id);
+    }
+
+    public long getTotalAmount() {
+        return productRepository.sumAmount();
     }
 
 }

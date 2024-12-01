@@ -19,11 +19,12 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<Product> create(@RequestBody @Valid ProductDTO dto) {
+
         return new ResponseEntity<>(productService.create(dto), HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<List<Product>> readAll() {
+    public ResponseEntity<List<ProductDTO>> readAll() {
        return new ResponseEntity<>(productService.readAll(), HttpStatus.OK);
     }
 
